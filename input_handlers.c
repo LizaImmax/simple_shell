@@ -50,8 +50,7 @@ int querry_input(char **args, char **front, int *ex_retrn)
 	for (index = 0; args[index]; index++)
 	{
 		if (_strncmp(args[index], "||", 2) == 0)
-		{
-			free(args[index]);
+		{	free(args[index]);
 			args[index] = NULL;
 			args = replace_aliases(args);
 			retrn = run_command(args, front, ex_retrn);
@@ -59,26 +58,21 @@ int querry_input(char **args, char **front, int *ex_retrn)
 			{
 				args = &args[++index];
 				index = 0;
-			}
-			else
+			} else
 			{
 				for (index++; args[index]; index++)
 					free(args[index]);
 				return (retrn);
 			}
-		}
-		else if (_strncmp(args[index], "&&", 2) == 0)
-		{
-			free(args[index]);
+		} else if (_strncmp(args[index], "&&", 2) == 0)
+		{	free(args[index]);
 			args[index] = NULL;
 			args = replace_aliases(args);
 			retrn = run_command(args, front, ex_retrn);
 			if (*ex_retrn == 0)
-			{
-				args = &args[++index];
+			{	args = &args[++index];
 				index = 0;
-			}
-			else
+			} else
 			{
 				for (index++; args[index]; index++)
 					free(args[index]);
@@ -127,14 +121,14 @@ int run_command(char **args, char **front, int *ex_retrn)
 }
 
 /**
- * handle_args - Gets, calls, and runs the execution of a command.
- * @exe_ret: The return value of the parent process' last executed command.
+ * exec_command - Gets, calls, and runs the execution of a command.
+ * @ex_retrn: The return value of the parent process' last executed command.
  *
  * Return: If an end-of-file is read - END_OF_FILE (-2).
  *         If the input cannot be tokenized - -1.
  *         O/w - The exit value of the last executed command.
  */
-int exec_commnad(int *ex_retrn)
+int exec_command(int *ex_retrn)
 {
 	int retrn = 0, index;
 	char **args, *line = NULL, **front;
@@ -174,7 +168,7 @@ int exec_commnad(int *ex_retrn)
 }
 
 /**
- * check_args - Checks if there are any leading ';', ';;', '&&', or '||'.
+ * check_input - Checks if there are any leading ';', ';;', '&&', or '||'.
  * @args: 2D pointer to tokenized commands and arguments.
  *
  * Return: If a ';', '&&', or '||' is placed at an invalid position - 2.

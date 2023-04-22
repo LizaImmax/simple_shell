@@ -4,7 +4,6 @@
 /**
  * get_path - Locates a command in the PATH.
  * @command: command to locate.
- 
  * Return: NULL on error, otherwise - the full pathname of the command.
  */
 char *get_path(char *command)
@@ -89,17 +88,15 @@ char *copy_path(char *path)
 			}
 			else
 				_strcat(path_copy, ":");
-		}
-		else
-		{
+		} else
 			_strncat(path_copy, &path[i], 1);
-		}
 	}
 	return (path_copy);
 }
 
+
 /**
- * get_path_dir - Tokenizes a colon-separated list of
+ * list_paths - Tokenizes a colon-separated list of
  *                directories into a list_s linked list.
  * @path: The colon-separated list of directories.
  *
