@@ -130,7 +130,7 @@ void replace_var(char **line, int *exe_ret)
 					old_line[k] != ' '; k++)
 					;
 				len = k - (j + 1);
-				replacement = _env_val(&old_line[j + 1], len);
+				replacement = env_val(&old_line[j + 1], len);
 			}
 			new_line = malloc(j + _strlen(replacement)
 					  + _strlen(&old_line[k]) + 1);
