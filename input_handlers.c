@@ -27,8 +27,8 @@ char *get_input(char *vars, int *ex_retrn)
 	}
 
 	vars[read - 1] = '\0';
-	variable_replacement(&vars, ex_retrn);
-	handle_line(&vars, read);
+	replace_var(&vars, ex_retrn);
+	line_handler(&vars, read);
 
 	return (vars);
 }
