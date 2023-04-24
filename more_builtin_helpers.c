@@ -1,14 +1,14 @@
 #include "simple_shell.h"
 
-void _env(void);
-void _setenv(void);
-void _unsetenv(void);
-void _history(void);
+void env_help(void);
+void setenv_help(void);
+void unsetenv_help(void);
+void history_help(void);
 
 /**
- * _env - Displays information on the shell builtin command 'env'.
+ * env_help - Displays information on the shell builtin command 'env'.
  */
-void _env(void)
+void env_help(void)
 {
 	char *msg = "env: env\n\tPrints the current environment.\n";
 
@@ -16,9 +16,9 @@ void _env(void)
 }
 
 /**
- * _setenv - Displays information on the shell builtin command 'setenv'.
+ * setenv_help - Displays information on the shell builtin command 'setenv'.
  */
-void _setenv(void)
+void setenv_help(void)
 {
 	char *msg = "setenv: setenv [VARIABLE] [VALUE]\n\tInitializes a new";
 
@@ -30,10 +30,10 @@ void _setenv(void)
 }
 
 /**
- * _unsetenv - Displays information on the shell builtin command
+ * unsetenv_help - Displays information on the shell builtin command
  * 'unsetenv'.
  */
-void _unsetenv(void)
+void unsetenv_help(void)
 {
 	char *msg = "unsetenv: unsetenv [VARIABLE]\n\tRemoves an ";
 
