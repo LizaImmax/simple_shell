@@ -94,7 +94,7 @@ char *command_error(char **args);
 
 /* Linkedlist Helpers */
 list_t *add_node(list_t **head, const char *str, int num);
-list_t *add_node_end(list_t **head, const char *str, int num);
+list_t *add_node_end(list_t **head, char *dir);
 void free_list(list_t **head_ptr);
 int delete_node_at_index(list_t **head, unsigned int index);
 alias_t *add_alias_end(alias_t **head, char *name, char *value);
