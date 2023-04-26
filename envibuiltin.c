@@ -3,76 +3,95 @@
 
 /**
  * shell_unsetenv - Remove an environment variable
- * @info: Structure containing potential arguments. Used to maintain
+ * @args: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
  *  Return: 1 on delete, 0 otherwise
- * @var: the string env var property
+ * @front: pointer to the start of the args
  */
-int shell_unsetenv(info_t *info, char *var)
+int shell_unsetenv(char **args, char __attribute__((__unused__)) **front)
 {
-	list_t *node = info->env;
-	size_t i = 0;
-	char *p;
+	char **env_var, **new_environ;
+	size_t size;
+	int index, index2;
 
-	if (!node || !var)
+	if (!args[0])
+		return (error_c(args, -1));
+	env_var = _getenv(args[0]);
+	if (!env_var)
 		return (0);
 
-	while (node)
+	for (size = 0; environ[size]; size++)
+		;
+
+	new_environ = malloc(sizeof(char *) * size);
+	if (!new_environ)
+		return (error_c(args, -1));
+
+	for (index = 0, index2 = 0; environ[index]; index++)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		if (*env_var == environ[index])
 		{
-			info->env_changed = delete_node_at_index(&(info->env), i);
-			i = 0;
-			node = info->env;
+			free(*env_var);
 			continue;
 		}
-		node = node->next;
-		i++;
+		new_environ[index2] = environ[index];
+		index2++;
 	}
-	return (info->env_changed);
-}
+	free(environ);
+	environ = new_environ;
+	environ[size - 1] = NULL;
 
+	return (0);
+}
 /**
  * shell_setenv - Initialize a new environment variable,
  *             or modify an existing one
- * @info: Structure containing potential arguments. Used to maintain
+ * @args: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
- * @var: the string env var property
- * @value: the string env var value
+ * @front: the string env var value
  *  Return: Always 0
  */
-int shell_setenv(info_t *info, char *var, char *value)
+int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 {
-	char *buf = NULL;
-	list_t *node;
-	char *p;
+	char **env_var = NULL, **new_environ, *new_value;
+	size_t size;
+	int index;
 
-	if (!var || !value)
-		return (0);
+	if (!args[0] || !args[1])
+		return (error_c(args, -1));
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buf)
-		return (1);
-	_strcpy(buf, var);
-	_strcat(buf, "=");
-	_strcat(buf, value);
-	node = info->env;
-	while (node)
+	new_value = malloc(_strlen(args[0]) + 1 + _strlen(args[1]) + 1);
+	if (!new_value)
+		return (error_c(args, -1));
+	_strcpy(new_value, args[0]);
+	_strcat(new_value, "=");
+	_strcat(new_value, args[1]);
+
+	env_var = _getenv(args[0]);
+	if (env_var)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
-		{
-			free(node->str);
-			node->str = buf;
-			info->env_changed = 1;
-			return (0);
-		}
-		node = node->next;
+		free(*env_var);
+		*env_var = new_value;
+		return (0);
 	}
-	add_node_end(&(info->env), buf, 0);
-	free(buf);
-	info->env_changed = 1;
+	for (size = 0; environ[size]; size++)
+		;
+
+	new_environ = malloc(sizeof(char *) * (size + 2));
+	if (!new_environ)
+	{
+		free(new_value);
+		return (error_c(args, -1));
+	}
+
+	for (index = 0; environ[index]; index++)
+		new_environ[index] = environ[index];
+
+	free(environ);
+	environ = new_environ;
+	environ[index] = new_value;
+	environ[index + 1] = NULL;
+
 	return (0);
 }
 

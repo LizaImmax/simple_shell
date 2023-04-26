@@ -110,7 +110,7 @@ void replace_var(char **args, int *exe_ret);
 
 /*Builtin Handlers */
 int (*get_builtin(char *command))(char **args, char **front);
-int shell_exit(char **args, char **front);
+int exit_shell(char **args, char **front);
 int shell_cd(char **args, char __attribute__((__unused__)) **front);
 int shell_help(char **args, char __attribute__((__unused__)) **front);
 
@@ -118,7 +118,7 @@ int shell_help(char **args, char __attribute__((__unused__)) **front);
 void _all(void);
 void _alias(void);
 void _cd(void);
-void _exit(void);
+void shell_exit(void);
 void _help(void);
 void env_help(void);
 void setenv_help(void);
@@ -131,14 +131,14 @@ void print_alias(alias_t *alias);
 char **replace_aliases(char **args);
 
 /*Environmental Builtin */
-int shell_unsetenv(info_t *info, char *var);
-int shell_setenv(info_t *info, char *var, char *value);
 int shell_env(char **args, char __attribute__((__unused__)) **front);
+int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
+int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
 
 /* Environment Handlers*/
 char **_copyenv(void);
 void free_env(void);
-char *_getenv(info_t *info, const char *name);
+char **_getenv(const char *var);
 
 /*Main Helpers*/
 void assign_line(char **lineptr, size_t *n, char *buffer, size_t b);

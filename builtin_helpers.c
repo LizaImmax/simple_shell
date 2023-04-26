@@ -73,7 +73,7 @@ void _cd(void)
 /**
  * _exit - Displays information on the shellby builtin command 'exit'.
  */
-void _exit(void)
+void shell_exit(void)
 {
 	char *msg = "exit: exit [STATUS]\n\tExits the shell.\n\n\tThe ";
 

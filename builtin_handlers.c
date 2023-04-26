@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 
 int (*get_builtin(char *command))(char **args, char **front);
-int shell_exit(char **args, char **front);
+int exit_shell(char **args, char **front);
 int shell_cd(char **args, char __attribute__((__unused__)) **front);
 int shell_help(char **args, char __attribute__((__unused__)) **front);
 
@@ -15,7 +15,7 @@ int shell_help(char **args, char __attribute__((__unused__)) **front);
 int (*get_builtin(char *command))(char **args, char **front)
 {
 	builtin_t funcs[] = {
-		{ "exit", shell_exit },
+		{ "exit", exit_shell },
 		{ "env", shell_env },
 		{ "setenv", shell_setenv },
 		{ "unsetenv", shell_unsetenv },
@@ -46,7 +46,7 @@ int (*get_builtin(char *command))(char **args, char **front)
  *
  * Description: Upon returning -3, the program exits back in the main function.
  */
-int shell_exit(char **args, char **front)
+int exit_shell(char **args, char **front)
 {
 	int i, len_of_int = 10;
 	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
@@ -177,7 +177,7 @@ int shell_help(char **args, char __attribute__((__unused__)) **front)
 	else if (_strcmp(args[0], "cd") == 0)
 		_cd();
 	else if (_strcmp(args[0], "exit") == 0)
-		_exit();
+		shell_exit();
 	else if (_strcmp(args[0], "env") == 0)
 		env_help();
 	else if (_strcmp(args[0], "setenv") == 0)

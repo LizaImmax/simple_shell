@@ -1,10 +1,5 @@
 #include "simple_shell.h"
 
-int cant_open(char *file_path);
-int run_file_commands(char *file_path, int *exe_ret);
-void signal_handler(int sig);
-int execute(char **args, char **front);
-
 /**
  * signal_handler - Prints a new prompt upon a signal.
  * @sig: The signal.

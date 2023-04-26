@@ -62,18 +62,16 @@ char **_copyenv(void)
  *
  * Return: the value
  */
-
-char *_getenv(info_t *info, const char *name)
+char **_getenv(const char *var)
 {
-	list_t *node = info->env;
-	char *p;
+	int index, len;
 
-	while (node)
+	len = _strlen(var);
+	for (index = 0; environ[index]; index++)
 	{
-		p = starts_with(node->str, name);
-		if (p && *p)
-			return (p);
-		node = node->next;
+		if (_strncmp(var, environ[index], len) == 0)
+			return (&environ[index]);
 	}
+
 	return (NULL);
 }
