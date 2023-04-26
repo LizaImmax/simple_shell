@@ -125,6 +125,7 @@ void history_help(void);
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
 char **replace_aliases(char **args);
+void free_alias_list(alias_t *head);
 
 /*Environmental Builtin */
 int shell_env(char **args, char __attribute__((__unused__)) **front);
