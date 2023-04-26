@@ -162,4 +162,4 @@ char *exit_error(char **args);
 char *cd_error(char **args);
 char *syntax_error(char **args);
 
-
+#endif
