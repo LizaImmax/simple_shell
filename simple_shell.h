@@ -132,8 +132,8 @@ char **replace_aliases(char **args);
 
 /*Environmental Builtin */
 int shell_env(char **args, char __attribute__((__unused__)) **front);
-int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
+int shell_setenv(char **args, char __attribute__((__unused__)) **front);
+int shell_unsetenv(char **args, char __attribute__((__unused__)) **front);
 
 /* Environment Handlers*/
 char **_copyenv(void);
