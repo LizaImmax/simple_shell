@@ -20,7 +20,7 @@ int (*get_builtin(char *command))(char **args, char **front)
 		{ "setenv", shell_setenv },
 		{ "unsetenv", shell_unsetenv },
 		{ "cd", shell_cd },
-		{ "alias", print_alias },
+		{ "alias", shell_alias },
 		{ "help", shell_help },
 		{ NULL, NULL }
 	};

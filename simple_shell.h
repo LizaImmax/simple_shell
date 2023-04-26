@@ -79,6 +79,8 @@ int count_tokens(char *str, char *delim);
 int token_len(char *str, char *delim);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char **_strtok(char *line, char *delim);
+char _strncat(char *dest, const char *src, size_t n);
+
 
 /* Error Handlers */
 int error_c(char **args, int err);
@@ -107,8 +109,8 @@ size_t print_list(const list_t *h);
 
 
 /* Input Helpers */
-char *get_input(char *vars, int *ex_retrn);
-int querry_input(char **args, char **front, int *ex_retrn);
+char *get_args(char *line, int *exe_ret);
+int call_args(char **args, char **front, int *exe_ret);
 int run_command(char **args, char **front, int *ex_retrn);
 int exec_command(int *ex_retrn);
 int check_input(char **args);
@@ -165,6 +167,8 @@ void signal_handler(int sig);
 int execute(char **args, char **front);
 int main(int argc, char *argv[]);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+char **replace_aliases(char **args);
 
 /*Error Messages*/
 char *env_error(char **args);

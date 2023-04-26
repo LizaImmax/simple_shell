@@ -86,7 +86,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 /**
- * get_line - Read inpt from stream
+ * _getline - Read inpt from stream
  * @lineptr: buffer that stores the input
  * @n: size of lineptr
  * @stream: stream to read from
