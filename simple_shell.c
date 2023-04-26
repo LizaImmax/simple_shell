@@ -1,8 +1,9 @@
 #include "simple_shell.h"
 
-void execute(char **args, char **front);
+int execute(char **args, char **front);
 int cant_open(char *file_path);
-int run_file_commands(char *file_path int *exe_ret);
+int run_file_commands(char *file_path, int *exe_ret);
+void signal_handler(int sig);
 
 /**
  * signal_handler - Prints a new prompt upon a signal.
@@ -87,7 +88,8 @@ int execute(char **args, char **front)
 int cant_open(char *file_path)
 {
 	char *error, *hist_str;
-	int len;
+	int len, hist = 0;
+	char name[100];
 
 	hist_str = _itos(hist);
 	if (!hist_str)
@@ -133,7 +135,6 @@ int run_file_commands(char *file_path, int *exe_ret)
 	char buffer[120];
 	int ret;
 
-	hist = 0;
 	file = open(file_path, O_RDONLY);
 	if (file == -1)
 	{
@@ -207,9 +208,9 @@ int run_file_commands(char *file_path, int *exe_ret)
  */
 int main(int argc, char *argv[])
 {
-	int ret = 0, retn;
+	int ret = 0, retn, hist;
 	int *exe_ret = &retn;
-	char *prompt = "$ ", *new_line = "\n";
+	char *prompt = "$ ", *new_line = "\n", name;
 
 	name = argv[0];
 	hist = 1;

@@ -144,7 +144,6 @@ int run_file_commands(char *file_path, int *exe_ret);
 void signal_handler(int sig);
 int execute(char **args, char **front);
 
-
 /*Error Messages*/
 char *env_error(char **args);
 char *notfound_error(char **args);
