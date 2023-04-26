@@ -1,5 +1,5 @@
-#ifndef SIMPLE_SHELL_H_
-#define SIMPLE_SHELL_H_
+#ifndef SIMPLE_SHELL_H
+#define SIMPLE_SHELL_H
 
 
 #include <fcntl.h>
