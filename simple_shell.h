@@ -153,6 +153,8 @@ int cant_open(char *file_path);
 int run_file_commands(char *file_path, int *exe_ret);
 void signal_handler(int sig);
 int execute(char **args, char **front);
+int main(int argc, char *argv[]);
+
 
 /*Error Messages*/
 char *env_error(char **args);
