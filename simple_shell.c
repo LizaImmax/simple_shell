@@ -208,12 +208,12 @@ int run_file_commands(char *file_path, int *exe_ret)
  */
 int main(int argc, char *argv[])
 {
-	int ret = 0, retn, hist;
+	int ret = 0, retn;//, hist;
 	int *exe_ret = &retn;
-	char *prompt = "$ ", *new_line = "\n", name;
+	char *prompt = "$ ", *new_line = "\n";//, name;
 
-	name = argv[0];
-	hist = 1;
+	//name = argv[0];
+	//hist = 1;
 	aliases = NULL;
 	signal(SIGINT, signal_handler);
 
@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
 	if (!isatty(STDIN_FILENO))
 	{
 		while (ret != END_OF_FILE && ret != EXIT)
-			ret = exe_command(exe_ret);
+			ret = exec_command(exe_ret);
 		free_env();
 		free_alias_list(aliases);
 		return (*exe_ret);
@@ -242,7 +242,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		write(STDOUT_FILENO, prompt, 2);
-		ret = exe_command(exe_ret);
+		ret = exec_command(exe_ret);
 		if (ret == END_OF_FILE || ret == EXIT)
 		{
 			if (ret == END_OF_FILE)

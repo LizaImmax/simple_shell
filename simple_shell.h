@@ -89,6 +89,8 @@ ssize_t newer_length(char *line);
 void line_handler(char **line, ssize_t read);
 int number_len(int num);
 char *_itos(int num);
+char *permission_error(char **args);
+char *command_error(char **args);
 
 /* Linkedlist Helpers */
 list_t *add_node(list_t **head, const char *str, int num);
