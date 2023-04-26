@@ -1,4 +1,5 @@
-#include simple_shell.h
+#include "simple_shell.h"
+
 
 /**
  * add_node - adds a node to the start of the list
@@ -140,3 +141,23 @@ int delete_node_at_index(list_t **head, unsigned int index)
 	}
 	return (0);
 }
+
+/**
+ * free_alias_list - Frees a alias_t linked list.
+ * @head: THe head of the alias_t list.
+ */
+
+void free_alias_list(alias_t *head)
+{
+	alias_t *next;
+
+	while (head)
+	{
+		next = head->next;
+		free(head->name);
+		free(head->value);
+		free(head);
+		head = next;
+	}
+}
+
