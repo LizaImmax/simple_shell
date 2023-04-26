@@ -96,7 +96,7 @@ int shell_setenv(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * _env - Prints the current environment.
+ * shell_env - Prints the current environment.
  * @args: An array of arguments passed to the shell.
  * @front: A double pointer to the beginning of args.
  *

@@ -71,7 +71,7 @@ void _cd(void)
 }
 
 /**
- * _exit - Displays information on the shellby builtin command 'exit'.
+ * shell_exit - Displays information on the shellby builtin command 'exit'.
  */
 void shell_exit(void)
 {

@@ -35,7 +35,7 @@ int (*get_builtin(char *command))(char **args, char **front)
 }
 
 /**
- * shell_exit - Causes normal process termination
+ * exit_shell - Causes normal process termination
  *                for the shell shell.
  * @args: An array of arguments containing the exit value.
  * @front: A double pointer to the beginning of args.
