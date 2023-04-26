@@ -17,7 +17,6 @@ void free_args(char **args, char **front)
 
 	for (i = 0; args[i] || args[i + 1]; i++)
 	free(args[i]);
-
 	free(front);
 }
 
@@ -36,10 +35,10 @@ char *_pid(void)
 	char *buffer;
 	ssize_t file;
 
-	file = open(\ / proc / self / stat, O_RDONLY);
+	file = open("/proc/self/stat", O_RDONLY);
 	if (file == -1)
 	{
-		perror(Cant read file);
+		perror("Cant read file");
 		return (NULL);
 	}
 	buffer = malloc(120);

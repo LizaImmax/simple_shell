@@ -3,7 +3,7 @@
 void _all(void);
 void _alias(void);
 void _cd(void);
-void _exit(void);
+void shell_exit(void);
 void _help(void);
 
 /**

@@ -1,5 +1,5 @@
-#ifndef SIMPLE_SHELL_H_
-#define SIMPLE_SHELL_H_
+#ifndef SIMPLE_SHELL_H
+#define SIMPLE_SHELL_H
 
 
 #include <fcntl.h>
@@ -17,6 +17,15 @@
 
 /* Global environemnt */
 extern char **environ;
+
+/* Global environemnt */
+extern char **environ;
+/* Global program name */
+char *name;
+/* Global history counter */
+int hist;
+
+
 
 /**
  * struct list_s - A new struct type defining a linked list.
