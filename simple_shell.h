@@ -75,10 +75,10 @@ int _strcmp(char *s1, char *s2);
 int _isdigit(const char *s);
 char *_strdup(const char *s);
 int cmp_chars(char str[], const char *delim);
-char *_strtok(char str[], const char *delim);
 int count_tokens(char *str, char *delim);
 int token_len(char *str, char *delim);
 int _strncmp(const char *s1, const char *s2, size_t n);
+char **_strtok(char *line, char *delim);
 
 /* Error Handlers */
 int error_c(char **args, int err);
@@ -142,8 +142,7 @@ void history_help(void);
 /* Alias Builtin */
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
-char **replace_aliases(char **args);
-void free_alias_list(alias_t *head);
+int shell_alias(char **args, char __attribute__((__unused__)) **front);
 
 /*Environmental Builtin */
 int shell_env(char **args, char __attribute__((__unused__)) **front);
@@ -162,6 +161,8 @@ int cant_open(char *file_path);
 int run_file_commands(char *file_path, int *exe_ret);
 void signal_handler(int sig);
 int execute(char **args, char **front);
+int main(int argc, char *argv[]);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /*Error Messages*/
 char *env_error(char **args);
