@@ -1,11 +1,8 @@
 #include "simple_shell.h"
 
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
-void set_alias(char *var_name, char *value);
-void print_alias(alias_t *alias);
 
 /**
- * shellby_alias - Builtin command that either prints all aliases, specific
+ * _alias - Builtin command that either prints all aliases, specific
  * aliases, or sets an alias.
  * @args: An array of arguments.
  * @front: A double pointer to the beginning of args.
@@ -13,7 +10,7 @@ void print_alias(alias_t *alias);
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
  */
-int shellby_alias(char **args, char __attribute__((__unused__)) **front)
+int _alias(char **args, char __attribute__((__unused__)) **front)
 {
 	alias_t *temp = aliases;
 	int i, ret = 0;
@@ -61,7 +58,7 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 void set_alias(char *var_name, char *value)
 {
 	alias_t *temp = aliases;
-	int len, j, k;
+	int len, p, k;
 	char *new_value;
 
 	*value = '\0';
@@ -70,10 +67,10 @@ void set_alias(char *var_name, char *value)
 	new_value = malloc(sizeof(char) * (len + 1));
 	if (!new_value)
 		return;
-	for (j = 0, k = 0; value[j]; j++)
+	for (p = 0, k = 0; value[p]; p++)
 	{
-		if (value[j] != '\'' && value[j] != '"')
-			new_value[k++] = value[j];
+		if (value[p] != '\'' && value[p] != '"')
+			new_value[k++] = value[p];
 	}
 	new_value[k] = '\0';
 	while (temp)
