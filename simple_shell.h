@@ -86,6 +86,14 @@ list_t *add_node(list_t **head, const char *str, int num);
 list_t *add_node_end(list_t **head, const char *str, int num);
 void free_list(list_t **head_ptr);
 int delete_node_at_index(list_t **head, unsigned int index);
+alias_t *add_alias_end(alias_t **head, char *name, char *value);
+void free_alias_list(alias_t *head);
+ssize_t get_node_index(list_t *head, list_t *node);
+size_t list_len(const list_t *h);
+size_t print_list(const list_t *h);
+
+
+
 
 /* Input Helpers */
 char *get_input(char *vars, int *ex_retrn);

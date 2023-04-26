@@ -1,3 +1,5 @@
+#include "simple_shell.h"
+
 /**
  * get_input - Gets a command from user.
  * @vars: store the command.
