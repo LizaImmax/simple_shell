@@ -69,6 +69,7 @@ int cmp_chars(char str[], const char *delim);
 char *_strtok(char str[], const char *delim);
 int count_tokens(char *str, char *delim);
 int token_len(char *str, char *delim);
+int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* Error Handlers */
 int error_c(char **args, int err);
