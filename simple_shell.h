@@ -133,8 +133,7 @@ void history_help(void);
 /* Alias Builtin */
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
-char **replace_aliases(char **args);
-void free_alias_list(alias_t *head);
+int shell_alias(char **args, char __attribute__((__unused__)) **front);
 
 /*Environmental Builtin */
 int shell_env(char **args, char __attribute__((__unused__)) **front);
