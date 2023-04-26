@@ -92,13 +92,13 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
  * @stream: stream to read from
  * Return: The number of bytes
  */
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
+
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
-	int i;
 	static ssize_t input;
-	ssize_t retval;
-	char *buffer;
-	char t = 'z';
+	ssize_t ret;
+	char c = 'x', *buffer;
+	int r;
 
 	if (input == 0)
 		fflush(stream);
@@ -106,31 +106,36 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 		return (-1);
 	input = 0;
 
-	buffer = malloc(sizeof(char) * BUFSIZE);
-	if (buffer == 0)
+	buffer = malloc(sizeof(char) * 120);
+	if (!buffer)
 		return (-1);
-	while (t != '\n')
+
+	while (c != '\n')
 	{
-		i = read(STDIN_FILENO, &t, 1);
-		if (i == -1 || (i == 0 && input == 0))
+		r = read(STDIN_FILENO, &c, 1);
+		if (r == -1 || (r == 0 && input == 0))
 		{
 			free(buffer);
 			return (-1);
 		}
-		if (i == 0 && input != 0)
+		if (r == 0 && input != 0)
 		{
 			input++;
 			break;
 		}
-		if (input >= BUFSIZE)
+
+		if (input >= 120)
 			buffer = _realloc(buffer, input, input + 1);
-		buffer[input] = t;
+
+		buffer[input] = c;
 		input++;
 	}
 	buffer[input] = '\0';
+
 	assign_line(lineptr, n, buffer, input);
-	retval = input;
-	if (i != 0)
+
+	ret = input;
+	if (r != 0)
 		input = 0;
-	return (retval);
+	return (ret);
 }

@@ -40,7 +40,7 @@ int shell_alias(char **args, char __attribute__((__unused__)) **front)
 				temp = temp->next;
 			}
 			if (!temp)
-				ret = create_error(args + i, 1);
+				ret = error_c(args + i, 1);
 		}
 		else
 			set_alias(args[i], value);
