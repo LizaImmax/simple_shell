@@ -1,22 +1,5 @@
 #include "simple_shell.h"
-#include <stdlib.h>
-#include <string.h>
 
-char **_copyenv(void);
-void free_env(void);
-
-
-/**
- * free_env - Frees the the environment copy.
- */
-void free_env(void)
-{
-	int index;
-
-	for (index = 0; environ[index]; index++)
-		free(environ[index]);
-	free(environ);
-}
 
 /**
  * _copyenv - Creates a copy of the environment.
@@ -56,10 +39,23 @@ char **_copyenv(void)
 }
 
 /**
- * _getenv - gets the value of an environ variable
- * @var: var name
+ * free_env - Frees the the environment copy.
+ */
+void free_env(void)
+{
+	int index;
+
+	for (index = 0; environ[index]; index++)
+		free(environ[index]);
+	free(environ);
+}
+
+/**
+ * _getenv - Gets an environmental variable from the PATH.
+ * @var: The name of the environmental variable to get.
  *
- * Return: the value
+ * Return: If the environmental variable does not exist - NULL.
+ *         Otherwise - a pointer to the environmental variable.
  */
 char **_getenv(const char *var)
 {
