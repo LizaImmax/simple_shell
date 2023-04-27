@@ -19,6 +19,45 @@ void print_alias(alias_t *alias)
 
 	write(STDOUT_FILENO, alias_string, len);
 	free(alias_string);
+}
+
+/**
+ * set_alias - Will either set an existing alias 'name' with a new value,
+ * 'value' or creates a new alias with 'name' and 'value'.
+ * @var_name: Name of the alias.
+ * @value: Value of the alias. First character is a '='.
+ */
+void set_alias(char *var_name, char *value)
+{
+	alias_t *temp = aliases;
+	int len, p, k;
+	char *new_value;
+
+	*value = '\0';
+	value++;
+	len = _strlen(value) - _strspn(value, "'\"");
+	new_value = malloc(sizeof(char) * (len + 1));
+	if (!new_value)
+		return;
+	for (p = 0, k = 0; value[p]; p++)
+	{
+		if (value[p] != '\'' && value[p] != '"')
+			new_value[k++] = value[p];
+	}
+	new_value[k] = '\0';
+	while (temp)
+	{
+		if (_strcmp(var_name, temp->name) == 0)
+		{
+			free(temp->value);
+			temp->value = new_value;
+			break;
+		}
+		temp = temp->next;
+	}
+	if (!temp)
+		add_alias_end(&aliases, var_name, new_value);
+}
 
 
 /**
@@ -69,43 +108,7 @@ int _alias(char **args, char __attribute__((__unused__)) **front)
 	return (ret);
 }
 
-/**
- * set_alias - Will either set an existing alias 'name' with a new value,
- * 'value' or creates a new alias with 'name' and 'value'.
- * @var_name: Name of the alias.
- * @value: Value of the alias. First character is a '='.
- */
-void set_alias(char *var_name, char *value)
-{
-	alias_t *temp = aliases;
-	int len, p, k;
-	char *new_value;
 
-	*value = '\0';
-	value++;
-	len = _strlen(value) - _strspn(value, "'\"");
-	new_value = malloc(sizeof(char) * (len + 1));
-	if (!new_value)
-		return;
-	for (p = 0, k = 0; value[p]; p++)
-	{
-		if (value[p] != '\'' && value[p] != '"')
-			new_value[k++] = value[p];
-	}
-	new_value[k] = '\0';
-	while (temp)
-	{
-		if (_strcmp(var_name, temp->name) == 0)
-		{
-			free(temp->value);
-			temp->value = new_value;
-			break;
-		}
-		temp = temp->next;
-	}
-	if (!temp)
-		add_alias_end(&aliases, var_name, new_value);
-}
 
 
 /**
@@ -148,4 +151,7 @@ char **replace_aliases(char **args)
 
 	return (args);
 }
+
+
+
 
