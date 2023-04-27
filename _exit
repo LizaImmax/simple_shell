@@ -1,0 +1,4 @@
+exit: exit [n]
+    Exit shell.
+
+    Exits the shell with a status of N.

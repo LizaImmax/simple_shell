@@ -1,0 +1,26 @@
+echo: echo [-neE] [arg ...]
+    Writes arguments to standard output.
+
+    Display the ARGs, separated by a single space character and followed by a
+    newline, on the standard output.
+
+    Options:
+      -n        do not append a newline
+      -e        enable interpretation of the following backslash escapes
+      -E        suppress interpretation of backslash escapes
+
+    `echo' interprets the following backslash-escaped characters:
+      \a        alert (bell)
+      \b        backspace
+      \c        suppress further output
+      \e        escape character
+      \E        escape character
+      \f        form feed
+      \n        new line
+      \r        carriage return
+      \t        horizontal tab
+      \v        vertical tab
+      \\        backslash
+
+    Exit Status:
+    Returns success unless a write error occurs.
