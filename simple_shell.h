@@ -101,6 +101,12 @@ char **_copyenv(void);
 void free_env(void);
 char **_getenv(const char *var);
 
+/* atoi */
+int interactive(info_t *);
+int is_delim(char, char *);
+int _isalpha(int);
+int _atoi(char *);
+
 /* Error Handling */
 int create_error(char **args, int err);
 char *error_env(char **args);
